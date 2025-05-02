@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Event Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Domain Event Table</h1>
+    <div id="tableContainer"></div>
+    <script src="hoge.js"></script>
+    <script>
+        // DOMContentLoaded イベントで実行
+        document.addEventListener('DOMContentLoaded', function() {
+            // hoge.js の実行
+            const event = domainEvent('商品が注文された');
+            event.note('ドメインイベントに対するコメント1');
+            event.note('ドメインイベントに対するコメント2');
+            event.action('商品を注文する').note('アクションに対するコメント1').note('アクションに対するコメント2');
+            event.aggregation('注文').note('集約に対するコメント1').note('集約に対するコメント2');
+            event.actor('顧客').note('アクタに対するコメント1').note('アクタに対するコメント2');
+
+            // テーブルを表示
+            const tableContainer = document.getElementById('tableContainer');
+            // コンソールに出力されるHTMLをtableContainerに挿入
+            tableContainer.innerHTML = event.displayTable();
+        });
+    </script>
+</body>
+</html>
